@@ -40,8 +40,8 @@ const Nav = () => {
       <div
         className={
           nav
-            ? 'flex flex-col md:hidden items-center justify-between w-full h-[90%] fixed right-0 top-20 bg-primary ease-in duration-300 z-10'
-            : 'flex flex-col items-center justify-between fixed right-[-100%] top-20 h-[90%] ease-in duration-300'
+            ? 'flex flex-col md:hidden items-center justify-between w-full h-[90%] fixed right-0 top-20 bg-primary ease-in duration-200 z-10'
+            : 'flex flex-col items-center justify-between fixed right-[-100%] top-20 h-[90%] ease-in duration-200'
         }
       >
         <ul className="w-full p-4">
