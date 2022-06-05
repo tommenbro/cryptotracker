@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import {
   AiOutlineMenu,
@@ -7,12 +7,24 @@ import {
   AiOutlineHome,
   AiOutlineUser,
 } from 'react-icons/ai';
+import { UserAuth } from '../context/AuthContext';
 
 const Nav = () => {
   const [nav, setNav] = useState(false);
+  const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
 
   const toggleNav = () => {
     setNav(!nav);
+  };
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
@@ -25,18 +37,35 @@ const Nav = () => {
       <div className="hidden md:block">
         <ThemeToggle />
       </div>
+
       {/*Login/Register*/}
-      <div className="hidden md:block mr-4">
-        <Link to={'/login'} className="p-4 hover:text-accent">
-          Login
-        </Link>
-        <Link
-          to={'/register'}
-          className="bg-button text-buttonText px-5 py-2 rounded-2xl shadow-lg hover:shadow-xl hover:text-primary hover:bg-secondary"
-        >
-          Register
-        </Link>
-      </div>
+      {user?.email ? (
+        <div className="hidden md:block mr-4">
+          <Link to={'/account'} className="p-4 hover:text-accent">
+            Account
+          </Link>
+          <Link
+            to={'/'}
+            onClick={handleLogOut}
+            className="bg-button text-buttonText px-5 py-2 rounded-2xl shadow-lg hover:shadow-xl hover:text-primary hover:bg-secondary"
+          >
+            Log out
+          </Link>
+        </div>
+      ) : (
+        <div className="hidden md:block mr-4">
+          <Link to={'/login'} className="p-4 hover:text-accent">
+            Login
+          </Link>
+          <Link
+            to={'/register'}
+            className="bg-button text-buttonText px-5 py-2 rounded-2xl shadow-lg hover:shadow-xl hover:text-primary hover:bg-secondary"
+          >
+            Register
+          </Link>
+        </div>
+      )}
+
       {/*Hamburger Icon*/}
       <div onClick={toggleNav} className="block md:hidden cursor-pointer z-10">
         {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
@@ -53,7 +82,11 @@ const Nav = () => {
           <li className="border-b py-6 ml-2  justify-between items-start">
             <div className="flex flex-row">
               <AiOutlineHome className="text-primary text-2xl mr-4" />
-              <Link to={'/'} className=" items-center cursor-pointer">
+              <Link
+                to={'/'}
+                className=" items-center cursor-pointer"
+                onClick={toggleNav}
+              >
                 Home
               </Link>
             </div>
@@ -61,22 +94,26 @@ const Nav = () => {
           <li className="border-b py-6 ml-2  justify-between items-start">
             <div className="flex flex-row">
               <AiOutlineUser className="text-primary text-2xl mr-4" />
-              <Link to={'/account'} className=" items-center cursor-pointer">
+              <Link
+                to={'/account'}
+                className=" items-center cursor-pointer"
+                onClick={toggleNav}
+              >
                 Account
               </Link>
             </div>
           </li>
-          <li className="border-b py-6">
+          <li className="border-b py-6 ml-2">
             <ThemeToggle />
           </li>
         </ul>
         <div className="flex flex-col w-full p-4">
-          <Link to={'/login'}>
+          <Link to={'/login'} onClick={toggleNav}>
             <button className="w-full my-2 p-3 bg-primary text-primary border border-slate-400   rounded-2xl shadow-xl">
               Login
             </button>
           </Link>
-          <Link to={'/register'}>
+          <Link to={'/register'} onClick={toggleNav}>
             <button className="w-full my-2 p-3 bg-button text-buttonText shadow-xl rounded-2xl">
               Register
             </button>
