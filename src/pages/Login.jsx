@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logIn, UserAuth } from '../context/AuthContext';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { logIn } = UserAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await logIn(email, password);
+      navigate('/account');
+    } catch (error) {
+      setError(e.message);
+      console.log(e.message);
+    }
+  };
+
   return (
     <div>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
         <h1 className="text-3xl font-bold">Log In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="my-4">
             <label className="text-sm">Email: </label>
             <div className="my-2 w-full relative rounded-xl shadow-xl">
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 p-2 bg-secondary border-input rounded-2xl"
                 type="email"
                 placeholder="Enter your email"
+                required
               />
               <AiOutlineMail className="absolute right-5 top-3 text-gray-400" />
             </div>
@@ -23,6 +44,7 @@ const Login = () => {
             <label className="text-sm">Password: </label>
             <div className="my-2 w-full relative rounded-xl shadow-xl">
               <input
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 p-2 bg-secondary border-input rounded-2xl"
                 type="password"
                 placeholder="Enter your password"

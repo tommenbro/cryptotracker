@@ -8,10 +8,12 @@ const SavedCoin = () => {
   return (
     <div>
       {coins.length === 0 ? (
-        <p>
-          You don't have any coins saved.
-          <Link to={'/'}> Search for coins to save to your Watchlist.</Link>
-        </p>
+        <Link className="text-primary" to={'/'}>
+          <p className="text-sm">
+            No coins saved. Please search for coins to save to your{' '}
+            <span className="font-semibold">Watchlist</span>.
+          </p>
+        </Link>
       ) : (
         <table className="w-full border-collapse text-center">
           <thead>
