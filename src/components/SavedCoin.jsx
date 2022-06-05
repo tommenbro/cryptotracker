@@ -10,12 +10,12 @@ const SavedCoin = () => {
   const { user } = UserAuth();
 
   useEffect(() => {
-    onSnapshot(doc(db, 'users', `${user.email}`), (doc) => {
+    onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
       setCoins(doc.data()?.watchList);
     });
-  }, [user.email]);
+  }, [user?.email]);
 
-  const coinPath = doc(db, 'users', `${user.email}`);
+  const coinPath = doc(db, 'users', `${user?.email}`);
   const removeCoin = async (id) => {
     try {
       const result = coins.filter((item) => item.id !== id);
@@ -29,7 +29,7 @@ const SavedCoin = () => {
 
   return (
     <div>
-      {coins.length === 0 ? (
+      {coins?.length === 0 ? (
         <Link className="text-primary" to={'/'}>
           <p className="text-sm">
             No coins saved. Please search for coins to save to your{' '}

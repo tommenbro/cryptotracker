@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineMail, AiFillLock, AiOutlineProfile } from 'react-icons/ai';
+import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
@@ -7,7 +7,6 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const { register } = UserAuth();
 
   const handleSubmit = async (e) => {
@@ -16,8 +15,8 @@ const Register = () => {
     try {
       await register(email, password);
     } catch (error) {
-      setError(e.message);
-      console.log(e.message);
+      setError(error.message);
+      console.log(error.message);
     }
   };
 

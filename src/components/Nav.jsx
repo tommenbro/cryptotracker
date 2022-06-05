@@ -107,18 +107,28 @@ const Nav = () => {
             <ThemeToggle />
           </li>
         </ul>
-        <div className="flex flex-col w-full p-4">
-          <Link to={'/login'} onClick={toggleNav}>
-            <button className="w-full my-2 p-3 bg-primary text-primary border border-slate-400   rounded-2xl shadow-xl">
-              Login
-            </button>
-          </Link>
-          <Link to={'/register'} onClick={toggleNav}>
-            <button className="w-full my-2 p-3 bg-button text-buttonText shadow-xl rounded-2xl">
-              Register
-            </button>
-          </Link>
-        </div>
+        {user?.email ? (
+          <div onClick={toggleNav} className="flex flex-col w-full p-4">
+            <Link to={'/'} onClick={handleLogOut}>
+              <button className="w-full my-2 p-3 bg-button text-buttonText shadow-xl rounded-2xl">
+                Log out
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div onClick={toggleNav} className="flex flex-col w-full p-4">
+            <Link to={'/login'}>
+              <button className="w-full my-2 p-3 bg-secondary text-primary font-semibold border border-slate-400   rounded-2xl shadow-xl">
+                Login
+              </button>
+            </Link>
+            <Link to={'/register'}>
+              <button className="w-full my-2 p-3 bg-button font-semibold text-buttonText shadow-xl rounded-2xl">
+                Register
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
