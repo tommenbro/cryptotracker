@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-
 import CoinItem from './CoinItem';
 
 const CoinSearch = ({ coins }) => {
   const [searchParam, setSearchParam] = useState('');
 
   return (
-    <div className="rounded-div my-4">
+    <div className="rounded-div my-4 ">
       {/*Search input*/}
-      <div className="flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right">
+      <div className="flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right ml-4 mr-4">
         <h1 className="text-2xl font-bold my-2 ">Cryptocurrencies</h1>
         <form>
           <input
@@ -21,7 +20,7 @@ const CoinSearch = ({ coins }) => {
       </div>
 
       {/*Coin list table*/}
-      <table className="w-full border-collapse text-center">
+      <table className="w-full border-collapse text-center ">
         <thead>
           <tr className="border-b-2 shadow-sm">
             <th></th>

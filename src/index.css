@@ -7,18 +7,21 @@
 }
 
 .rounded-div {
-  @apply border-secondary rounded-2xl shadow-xl bg-primary px-2 max-w-[1140px] w-full mx-auto;
+  @apply border-secondary rounded-2xl shadow-xl bg-primary max-w-screen-2xl px-4 w-full mx-auto;
 }
 .rounded-div-2 {
-  @apply border-secondary rounded-xl shadow-lg bg-primary px-2 max-w-[1140px] w-full mx-auto;
+  @apply border-secondary rounded-xl shadow-lg bg-primary px-2 max-w-screen-2xl w-full mx-auto;
+}
+.rounded-div-3 {
+  @apply border-secondary rounded-2xl shadow-xl bg-primary p-4 max-w-screen-2xl w-full mx-auto;
 }
 
 .dark {
-  --color-bg-primary: #222222;
+  --color-bg-primary: #18262e;
   --color-bg-secondary: #37474f;
   --color-text-primary: #ffffff;
   --color-text-secondary: #dee4e7;
-  --color-text-accent: #d1d2d4;
+  --color-text-accent: #c2c4c7;
   --color-bg-input: #6f8c9b;
   --color-bg-button: #d1d2d4;
 }
@@ -26,7 +29,7 @@
 .light {
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #f1f1f1;
-  --color-text-primary: #222222;
+  --color-text-primary: #18262e;
   --color-text-secondary: #6f8c9b;
   --color-text-accent: #3e5b79;
   --color-bg-input: #f9f9fa;

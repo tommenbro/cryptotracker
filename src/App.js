@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Account from './pages/Account';
 import axios from 'axios';
 import CoinPage from './pages/CoinPage';
+import Footer from './components/Footer';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -24,16 +26,19 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home coins={coins} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/coin/:coinId" element={<CoinPage />}>
-          <Route path=":coinId" />
-        </Route>
-      </Routes>
+      <AuthContextProvider>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home coins={coins} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/coin/:coinId" element={<CoinPage />}>
+            <Route path=":coinId" />
+          </Route>
+        </Routes>
+        <Footer />
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

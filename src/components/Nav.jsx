@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineHome,
+  AiOutlineUser,
+} from 'react-icons/ai';
 
 const Nav = () => {
   const [nav, setNav] = useState(false);
@@ -14,20 +19,20 @@ const Nav = () => {
     <div className="flex items-center justify-between h-20 font-semibold rounded-div">
       {/*Home nav*/}
       <Link to={'/'}>
-        <h1 className="text-2xl font-bold">CryptoTracker</h1>
+        <h1 className="text-2xl font-bold ml-4">Crypto Watcher</h1>
       </Link>
       {/*Theme toggler*/}
       <div className="hidden md:block">
         <ThemeToggle />
       </div>
       {/*Login/Register*/}
-      <div className="hidden md:block">
+      <div className="hidden md:block mr-4">
         <Link to={'/login'} className="p-4 hover:text-accent">
           Login
         </Link>
         <Link
           to={'/register'}
-          className="bg-button text-buttonText px-5 py-2 rounded-2xl shadow-lg hover:shadow-xl hover:text-primary"
+          className="bg-button text-buttonText px-5 py-2 rounded-2xl shadow-lg hover:shadow-xl hover:text-primary hover:bg-secondary"
         >
           Register
         </Link>
@@ -45,13 +50,23 @@ const Nav = () => {
         }
       >
         <ul className="w-full p-4">
-          <li className="border-b py-6">
-            <Link to={'/'}>Home</Link>
+          <li className="border-b py-6 ml-2  justify-between items-start">
+            <div className="flex flex-row">
+              <AiOutlineHome className="text-primary text-2xl mr-4" />
+              <Link to={'/'} className=" items-center cursor-pointer">
+                Home
+              </Link>
+            </div>
+          </li>
+          <li className="border-b py-6 ml-2  justify-between items-start">
+            <div className="flex flex-row">
+              <AiOutlineUser className="text-primary text-2xl mr-4" />
+              <Link to={'/account'} className=" items-center cursor-pointer">
+                Account
+              </Link>
+            </div>
           </li>
           <li className="border-b py-6">
-            <Link to={'/'}>Account</Link>
-          </li>
-          <li className="">
             <ThemeToggle />
           </li>
         </ul>
